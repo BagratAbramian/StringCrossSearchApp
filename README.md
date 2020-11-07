@@ -279,20 +279,22 @@ e.g. é (Ã©) and © (Â©) will be rendered identical. Same with ã (Ã£) and
 ?	%	*	-
 |	&	(	_
 @	/	)	.
-#	equal	opening brakets	:
-~	^	closing brakets	,
+hashtag	=	[	:
+~	^	]	,
 "	`	{	;
-
 
 4.1.2 General symbols corrected
 
-!	$	+	}
-?	%	*	-
-|	&	(	_
-@	/	)	.
-#	=	[	:
-~	^	]	,
-"	`	{	;
+º	> 	¯	¼
+ª	¢	±	½
+¡	£	²	¾
+¿	¤	³	×
+€	¥	µ	÷
+¬	¦	¶	™
+·	§	·	§
+´	©	¸	…
+¨	«	»	Þ
+< 	®		
 
 4.1.3 Latin characters corrected
 
