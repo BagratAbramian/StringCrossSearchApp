@@ -279,8 +279,8 @@ e.g. é (Ã©) and © (Â©) will be rendered identical. Same with ã (Ã£) and
 ?	%	*	-
 |	&	(	_
 @	/	)	.
-#	=	[	:
-~	^	]	,
+#	=	opening brakets	:
+~	^	closing brakets	,
 "	`	{	;
 
 
