@@ -1,8 +1,8 @@
 StringCrossSearchApp v 1.1
--
+
 
 Developed by Bagrat Abramian Petrosian, using MATLAB R2019b
--
+
 
 Special thanks to:
 -
