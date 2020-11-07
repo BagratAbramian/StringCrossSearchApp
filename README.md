@@ -365,7 +365,7 @@ hashtag	=	[	:
 4.2 Diacritics' normalization
 
 original | new	||   original	 | new
-----------------------------------------
+
    Á	 | A	||	á	 | a
    Ä	 | A	||	ä	 | a
    À	 | A	||	à	 | a
