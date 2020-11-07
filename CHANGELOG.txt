@@ -1,0 +1,49 @@
+v 1.1
+ - Added main operating functions
+	 - Detect/correct special characters in input files
+		 - General symbols
+		 - Latin characters
+		 - Greek characters
+		 - Cyrilic characters
+	 - Export options
+		 - Export full matrix
+ - Added added functionality
+	 - Import data tags
+	 - Clear data tags
+	 - Import search tags
+	 - Clear search tags
+	 - Normalize vectors
+		 - Normalize diacritics
+	 - Current file name and output path displays
+ - Other changes
+	 - Improved importing
+	 - Fixed "Help" button not working
+	 - Removed "Copy search vector conflicts"
+		It stopped working and I didn't feel like fixing it
+	 - Changed to a tab-based design
+		 - Basic options
+		 - Advanced options
+		To reduce the size of the application on the screen and to remove options that are less likely to be changed away from the main screen
+	 - Renamed "Export correlation matrix" to "Export verification matrix"
+	 - Added tooltips
+	 - Some code cleaning and commenting
+	 - Some new error messages, warnings, and choices associated with the interaction between the added functions and the original ones
+v 1.0
+ - Created the main operating functions
+	 - Import data vector
+	 - Import search vector
+	 - Help
+	 - Export options
+		 - Export total search values vector (per data point)
+		 - Export total search values vector (per search point)
+		 - Export combined data matrix with totals
+		 - Export combined search matrix with totals
+		 - Export correlation matrix
+	 - Select output folder
+	 - Run cross-search
+ - Created some added functionality
+	 - Check search vector conflicts
+	 - Copy search vector conflicts
+	 - Help
+	 - Normalize vectors
+		 - Lowercase vectors
