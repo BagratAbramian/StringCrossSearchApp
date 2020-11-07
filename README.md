@@ -8,7 +8,9 @@ Special thanks to:
 -
 
 David Abramian (https://github.com/DavidAbramian), for providing the main function around which this entire app operates.
+
 Roman Ramirez (https://github.com/patowc), for suggesting I develop the above-mentioned function into an app.
+
 All the people who ask and answer in MATLAB Answers (https://www.mathworks.com/matlabcentral/answers/).
 
 This is a basic application developed for the purpose of comparing string arrays.
