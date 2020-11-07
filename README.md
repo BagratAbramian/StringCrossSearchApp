@@ -13,8 +13,8 @@ Roman Ramirez (https://github.com/patowc), for suggesting I develop the above-me
 
 All the people who ask and answer in MATLAB Answers (https://www.mathworks.com/matlabcentral/answers/).
 
-This is a basic application developed for the purpose of comparing string arrays.
-In particular, this is an app developed for searching many different substrings within strings.
+
+This is a basic application developed for the purpose of comparing string arrays. In particular, this is an app developed for searching many different substrings within strings.
 
 Instalation
 -
@@ -27,4 +27,5 @@ Contact information
 -
 
 To contact the developer, please send an email to bagratap@gmail.com
+
 Or through GitHub at github.com/BagratAbramian
