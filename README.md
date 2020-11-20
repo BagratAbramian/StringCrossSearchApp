@@ -1,4 +1,4 @@
-StringCrossSearchApp v 1.1
+StringCrossSearchApp v 1.2
 
 
 Developed by Bagrat Abramian Petrosian, using MATLAB R2019b
