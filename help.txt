@@ -39,9 +39,12 @@ The source file must be in the form of a vertical vector.
 Imports the list of substrings to be searched in the data vector.
 The source file must be in the form of a vertical vector.
 
-1.1.4 Check search vector conflicts
+1.1.4 Check search vector conflicts/redundancies
 
 Searches whether any of the substrings of the search vector is also a substring of any other substring.
+If it finds that several search vector entries are completely identical, you may choose to keep them all, 
+keep only the first instance, or keep only the last instance.
+Which instance you choose will have little effect outside of keeping only the corresponding search tags.
 The resulting conflict report is printed in the "Search vector conflicts" text box (see 1.1.5).
 
 1.1.5 Search vector conflicts
@@ -64,58 +67,66 @@ Imports a file to serve as tags for each of the entries of the search vector.
 The data tags do not affect the search, but are printed when exporting as "Export combined search matrix with totals" and "Full matrix".
 The search tags file must have the same number of rows as the search vector, and must be a vertical vector itself.
 
-1.1.9 Clear data tags
+1.1.9 Clear search tags
 
 Removes the current search tags loaded, so as to keep it from appearing in the export files.
 
-1.1.10 Export total search values vector (per data point)
+1.1.10 Clear data vector
+
+Removes the current data vector loaded.
+
+1.1.11 Clear search vector
+
+Removes the current search vector loaded.
+
+1.1.12 Export total search values vector (per data point)
 
 Upon run, creates a text file with a vertical vector for the number of substrings found in each string.
 The name of the file is defined in the "Total search values vector (pdp) filename" textbox.
 The folder in which it will be created is defined with the "Select output folder" button.
 
-1.1.11 Export total search values vector (per search point)
+1.1.13 Export total search values vector (per search point)
 
 Upon run, creates a text file with a vertical vector for the number of strings in which the respective substring is found.
 The name of the file is defined in the "Total search values vector (psp) filename" textbox.
 The folder in which it will be created is defined with the "Select output folder" button.
 
-1.1.12 Export combined data matrix with totals
+1.1.14 Export combined data matrix with totals
 
 Upon run, creates a xls file with the first column being the data vector, and the second will be the number of substrings found in each string.
 If there are data tags, the first column will be the data tags, the second will be the data vector, and the third will be the number of substrings found in each string.
 The name of the file is defined in the "Combined data matrix filename" textbox.
 The folder in which it will be created is defined with the "Select output folder" button.
 
-1.1.13 Export combined search matrix with totals
+1.1.15 Export combined search matrix with totals
 
 Upon run, creates a xls file with the first column being the search vector, and the second will be the number of strings in which the respective substring is found.
 If there are search tags, the first column will be the search tags, the second will be the search vector, and the second will be the number of strings in which the respective substring is found.
 The name of the file is defined in the "Combined search matrix filename" textbox.
 The folder in which it will be created is defined with the "Select output folder" button.
 
-1.1.14 Help
+1.1.16 Help
 
 Opens the "help.txt" file (The file you are reading right now).
 
-1.1.15 Normalize vectors
+1.1.17 Normalize vectors
 
 Normalizes the data and search vectors according to the "Normalization options" selected (see 1.2.4).
 This button doesn't perform any changes on the data and search tags, thus the same file used for data and search vectors may be imported as their own respective tags in order to preserve their state pre-normalization.
 
-1.1.16 Select output folder
+1.1.18 Select output folder
 
 Designates the folder in which the output file(s) will be saved.
 
-1.1.17 Run cross-search
+1.1.19 Run cross-search
 
 Executes the cross-search of the search vector in the data vector, and generates all the output files chosen.
 
-1.1.18 Current file names
+1.1.20 Current file names
 
 These text boxes display the currently loaded files' names.
 
-1.1.19 Current output directory
+1.1.21 Current output directory
 
 This text box displays the direction where the output files will be created.
 
@@ -138,13 +149,14 @@ The folder in which it will be created is defined with the "Select output folder
 
 1.2.3 Export full matrix (not recomended)
 
-Upon run, creates a xls file with 2 sheets.
+Upon run, creates a xls file with 1 or 2 sheets.
 In the sheet "data_x_search" the first column being the data vector, the second to the penultimate columns are whether the respective search entry appears in each entry of the data vector, 
 and the last row is a sum of all the search entries that appear in the corresponding data entry.
 The first row is the search vector, the second to penultimate rows are whether or not the respective data entry contains the each search entry, 
 and the last column is a sum of all the data entries that contain in the corresponding search entry.
 If there are data and/or search tags, they will instead take the first column and row respectively, displacing everything else one position.
 The sheet "search_x_data" is the sheet "data_x_search" transposed.
+You may choose to create only the data_x_search sheet, only the search_x_data sheet, or both.
 The name of the file is defined in the "Full matrix filename" textbox.
 The folder in which it will be created is defined with the "Select output folder" button.
 (!) Checking this option is HIGHLY not recomended, as it can take a lot of memory, time, and computational power to export even for the smallest of matrices.
@@ -159,6 +171,11 @@ However, if capitalization is key to your cross-search, uncheck this option.
 "Normalize diacritics" changes various letters with diacritics into the same letters without them.
 Note that this isn't done with German in mind, thus Ä, Ö, and Ü (and their lowercase equivalents) are normalized as "A", "O", and "U", rather than "AE", "OE" and "UE".
 To see which characters with diacritics are changed, see 4.2.
+
+1.2.5 Remove false positives
+
+This option allows you to remove positive results for search vector entries from data vector entries where they are only found within other search entries.
+Note that this doesn't remove positive results from redundant search vector entries.
 
 2 Errors and Warnings
 
@@ -250,15 +267,6 @@ will be imported as
 Hello
 friend
 
-3.1.2 Lines which contain only a space stop the import from proceding further in the file
-
-e.g. A file with
-Hello
- 
-friend
-will be imported as
-Hello
-
 3.2 Normalization issues
 
 3.2.1 If your vectors have special characters that have not been corrected, using "Lowercase vectors" may lead to misidentifications during the cross-search.
@@ -269,126 +277,132 @@ e.g. Ê (ÃŠ) and Ú (Ãš) will be rendered identical. Same with Ì (ÃŒ) and
 
 e.g. é (Ã©) and © (Â©) will be rendered identical. Same with ã (Ã£) and £ (Â£).
 
+3.3 Other issues
+
+3.3.1 The "Help" button only works on Windows systems
+
+The "Help" button calls to open this file with Notepad, so it will not work on systems without Notepad.
+
 4 Other information
 
 4.1 Symbols and special characters that are detected and normalized
 
 4.1.1 Symbols that do not cause import problems
 
-!	$	+	}
-?	%	*	-
-|	&	(	_
-@	/	)	.
-#	=	[	:
-~	^	]	,
-"	`	{	;
+!       $       +       }
+?       %       *       -
+|       &       (       _
+@       /       )       .
+#       =       [       :
+~       ^       ]       ,
+"       `       {       ;
 
 4.1.2 General symbols corrected
 
-º	> 	¯	¼
-ª	¢	±	½
-¡	£	²	¾
-¿	¤	³	×
-€	¥	µ	÷
-¬	¦	¶	™
-·	§	·	§
-´	©	¸	…
-¨	«	»	Þ
-< 	®		
+º       >       ¯       ¼
+ª       ¢       ±       ½
+¡       £       ²       ¾
+¿       ¤       ³       ×
+€       ¥       µ       ÷
+¬       ¦       ¶       ™
+·       §       ·       §
+´       ©       ¸       …
+¨       «       »       Þ
+<        ®              
 
 4.1.3 Latin characters corrected
 
-Á	Ô	ä	ô
-Ä	Õ	à	õ
-À	Ú	â	ú
-Â	Ü	ã	ü
-Ã	Ù	é	ù
-É	Û	ë	û
-Ë	Ñ	è	ñ
-È	Ç	ê	ç
-Ê	Å	í	å
-Í	Æ	ï	æ
-Ï	Ð	ì	ð
-Ì	Ø	î	ø
-Î	Ý	ó	ý
-Ó	Œ	ö	œ
-Ö	á	ò	ß
-Ò			
+Á       Ô       ä       ô
+Ä       Õ       à       õ
+À       Ú       â       ú
+Â       Ü       ã       ü
+Ã       Ù       é       ù
+É       Û       ë       û
+Ë       Ñ       è       ñ
+È       Ç       ê       ç
+Ê       Å       í       å
+Í       Æ       ï       æ
+Ï       Ð       ì       ð
+Ì       Ø       î       ø
+Î       Ý       ó       ý
+Ó       Œ       ö       œ
+Ö       á       ò       ß
+Ò                     
 
 4.1.4 Greek characters corrected
 
-Ά	Κ	έ	ο
-·	Λ	ή	π
-Έ	Μ	ί	ρ
-Ή	Ν	ΰ	ς
-Ί	Ξ	α	σ
-Ό	Ο	β	τ
-Ύ	Π	γ	υ
-Ώ	Ρ	δ	φ
-ΐ	Σ	ε	χ
-Α	Τ	ζ	ψ
-Β	Υ	η	ω
-Γ	Φ	θ	ϊ
-Δ	Χ	ι	ϋ
-Ε	Ψ	κ	ό
-Ζ	Ω	λ	ύ
-Η	Ϊ	μ	ώ
-Θ	Ϋ	ν	ϐ
-Ι	ά	ξ	ϑ
+Ά       Κ       έ       ο
+·       Λ       ή       π
+Έ       Μ       ί       ρ
+Ή       Ν       ΰ       ς
+Ί       Ξ       α       σ
+Ό       Ο       β       τ
+Ύ       Π       γ       υ
+Ώ       Ρ       δ       φ
+ΐ       Σ       ε       χ
+Α       Τ       ζ       ψ
+Β       Υ       η       ω
+Γ       Φ       θ       ϊ
+Δ       Χ       ι       ϋ
+Ε       Ψ       κ       ό
+Ζ       Ω       λ       ύ
+Η       Ϊ       μ       ώ
+Θ       Ϋ       ν       ϐ
+Ι       ά       ξ       ϑ
 
 4.1.5 Cyricic characters corrected
 
-Ё	Й	а	ч
-Ђ	К	б	ш
-Ѓ	Л	в	щ
-Є	М	г	ъ
-Ѕ	Н	д	ы
-І	О	е	ь
-Ї	П	ж	э
-Ј	Р	з	ю
-Љ	С	и	я
-Њ	Т	й	ё
-Ћ	У	к	ђ
-Ќ	Ф	л	ѓ
-Ў	Х	м	є
-Џ	Ц	н	ѕ
-А	Ч	о	і
-Б	Ш	п	ї
-В	Щ	р	ј
-Г	Ъ	с	љ
-Д	Ы	т	њ
-Е	Ь	у	ћ
-Ж	Э	ф	ќ
-З	Ю	х	ў
-И	Я	ц	џ
+Ё       Й       а       ч
+Ђ       К       б       ш
+Ѓ       Л       в       щ
+Є       М       г       ъ
+Ѕ       Н       д       ы
+І       О       е       ь
+Ї       П       ж       э
+Ј       Р       з       ю
+Љ       С       и       я
+Њ       Т       й       ё
+Ћ       У       к       ђ
+Ќ       Ф       л       ѓ
+Ў       Х       м       є
+Џ       Ц       н       ѕ
+А       Ч       о       і
+Б       Ш       п       ї
+В       Щ       р       ј
+Г       Ъ       с       љ
+Д       Ы       т       њ
+Е       Ь       у       ћ
+Ж       Э       ф       ќ
+З       Ю       х       ў
+И       Я       ц       џ
 
 4.2 Diacritics' normalization
 
-original | new	||   original	 | new
+original | new  ||   original    | new  
 ----------------------------------------
-   Á	 | A	||	á	 | a
-   Ä	 | A	||	ä	 | a
-   À	 | A	||	à	 | a
-   Â	 | A	||	â	 | a
-   Ã	 | A	||	ã	 | a
-   Å	 | A	||	å	 | a
-   É	 | E	||	é	 | e
-   Ë	 | E	||	ë	 | e
-   È	 | E	||	è	 | e
-   Ê	 | E	||	ê	 | e
-   Í	 | I	||	í	 | i
-   Ï	 | I	||	ï	 | i
-   Ì	 | I	||	ì	 | i
-   Î	 | I	||	î	 | i
-   Ó	 | O	||	ó	 | o
-   Ö	 | O	||	ö	 | o
-   Ò	 | O	||	ò	 | o
-   Ô	 | O	||	ô	 | o
-   Õ	 | O	||	õ	 | o
-   Ú	 | U	||	ú	 | u
-   Ü	 | U	||	ü	 | u
-   Ù	 | U	||	ù	 | u
-   Û	 | U	||	û	 | u
+   Á     | A    ||      á        | a    
+   Ä     | A    ||      ä        | a    
+   À     | A    ||      à        | a    
+   Â     | A    ||      â        | a    
+   Ã     | A    ||      ã        | a    
+   Å     | A    ||      å        | a    
+   É     | E    ||      é        | e    
+   Ë     | E    ||      ë        | e    
+   È     | E    ||      è        | e    
+   Ê     | E    ||      ê        | e    
+   Í     | I    ||      í        | i    
+   Ï     | I    ||      ï        | i    
+   Ì     | I    ||      ì        | i    
+   Î     | I    ||      î        | i    
+   Ó     | O    ||      ó        | o    
+   Ö     | O    ||      ö        | o    
+   Ò     | O    ||      ò        | o    
+   Ô     | O    ||      ô        | o    
+   Õ     | O    ||      õ        | o    
+   Ú     | U    ||      ú        | u    
+   Ü     | U    ||      ü        | u    
+   Ù     | U    ||      ù        | u    
+   Û     | U    ||      û        | u    
 
 5 Contact information
 

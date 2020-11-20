@@ -1,7 +1,30 @@
+v 1.2
+ - Added main operating functions
+	 - Advanced cross-search options
+		 - Remove false positives
+	 - Export options
+		 - Full matrix export options
+			 - Only data x search sheet
+			 - Only search x data sheet
+			 - Both sheets
+ - Added added functionality
+	 - Search vector conflicts
+		 - Upon identical search entries
+			 - Keep all search entries
+			 - Keep only first
+			 - Keep only last
+	 - Clear data vector
+	 - Clear search vector
+ - Fixed issues
+	 - Issue 3.1.2 ('Lines which contain only a space stop the import from proceding further in the file') resolved
+ - Other changes
+	 - Added and changed some code for future functionality
+	 - Renamed 'Check search vector conflicts' to 'Check seach vector conflicts/redundancies'
 v 1.1.1
- - Fixed issue
+ - Fixed issues
 	 - Warning 2.13 no longer appears regardless of "Full matrix" being selected as output and vector length
- - Named UI window
+ - Other changes
+	 - Renamed UI window to 'String Cross-Search App'
 v 1.1
  - Added main operating functions
 	 - Detect/correct special characters in input files
